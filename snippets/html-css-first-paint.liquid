@@ -1,0 +1,111 @@
+<style>
+
+	html {
+		padding-top: var(--s-announcement);
+	}
+
+	body {
+		opacity: 0;
+		animation: fadeIn 1s .6s both;
+	}
+
+	header {
+		position: absolute;
+		z-index: 10;
+		width: 100%;
+		top: 0;
+		left: 0;
+		right: 0;
+		padding: var(--s-3) var(--s-5);	
+		height: 125px;
+	}
+
+	html.flavor-purple #header-background {background-color: #f94fe2;}
+	html.flavor-blue #header-background {background-color: #25d6ee;}
+	html.flavor-red #header-background {background-color: #fb4c6a;}
+	html.flavor-green #header-background {background-color: #28ce33;}
+
+  	html.flavor-purple body {background-color: #e942cc;}
+	html.flavor-blue body {background-color: #19c4de;}
+	html.flavor-red body {background-color: #ed3f51;}
+	html.flavor-green body {background-color: #1dbe26;}
+  
+	html.flavor-purple main {background-color: #e942cc;}
+	html.flavor-blue main {background-color: #19c4de;}
+	html.flavor-red main {background-color: #ed3f51;}
+	html.flavor-green main {background-color: #1dbe26;}
+
+	html.flavor-purple p a {color: var(--cr-purple-light);}
+	html.flavor-blue p a {color: var(--cr-blue-light);}
+	html.flavor-red p a {color: var(--cr-red-light);}
+	html.flavor-green p a {color: var(--cr-green-light);}
+
+	.logo {
+		width: min(380px, 70%);
+		max-height: 100%;
+		margin: 0 auto;
+        margin-top: 5px;
+	}
+
+	#hero {
+		position: relative;
+		z-index: 1;
+        margin-top: -1px;
+	}
+
+	#hero-video-wrapper::after {
+		content: "";
+		display: block;
+		position: absolute;
+		bottom: -5px;
+		width: 100%;
+		height: 10px;
+		background: url({{'svg-plus.svg' | asset_url}});
+		background-size: 15px 10px;
+		z-index: 1;
+      filter: invert(1);
+	}
+
+	.hero-video {
+		width: 100%;
+	}
+
+		.hero-video.active {
+			z-index: 1;
+		}
+
+	.closeby-launcher-embed-toggle {
+		display: none !important;
+	}
+
+	@media (min-width: 1400px) {
+		#hero-video {
+			transform: translateY(-5vw);
+		}
+	}
+	
+	@media (max-width: 900px) {
+		#header {
+			position: relative;
+			align-items: flex-start;
+			padding: var(--s-2) var(--s-2) var(--s-6);
+			height: unset;
+		}
+
+		.logo {
+			transform: translate(-50%, var(--s-3));
+			margin: var(--s-4) auto;
+		}
+	}
+
+	@media (max-width: 600px) {
+		#mobile-buttons {
+			padding-left: var(--s-3);
+			padding-right: var(--s-3);
+		}
+	}
+
+	
+
+
+</style>

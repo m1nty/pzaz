@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html class="supports-no-js" lang="{{ request.locale.iso_code }}">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="theme-color" content="#fff" />
+<!-- Windows Phone -->
+<meta name="msapplication-navbutton-color" content="#fff">
+<!-- iOS Safari -->
+<meta name="apple-mobile-web-app-status-bar-style" content="#fff">
+  <title>
+    {{ shop.name }}
+  </title>
+
+  {% if settings.favicon %}
+    <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png" />
+  {% endif %}
+
+  <link rel="canonical" href="{{ canonical_url }}">
+  
+  {{ 'theme-custom.scss.css' | asset_url | stylesheet_tag }}
+
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  {% include 'social-meta-tags' %}
+
+	<link rel="preload" href="{{'pzaz-landing-1.mp4' | asset_url }}" as="video">
+	<link rel="preload" href="{{'pzaz-landing-2.mp4' | asset_url }}" as="video">
+	<link rel="preload" href="{{'pzaz-landing-3.mp4' | asset_url }}" as="video">
+	<link rel="preload" href="{{'pzaz-landing-4.mp4' | asset_url }}" as="video">
+
+	<script>
+		// site variables
+		const siteUrl = '{{ shop.url }}';
+		const root = document.documentElement;
+
+		// site credit
+		console.log(
+			'%cSite by View Source \n%cview-source.com', 
+			[ 
+				'margin: 20px 0 0;',
+				'font-size: 12px', 
+				'font-family: Helvetica, sans-serif', 
+				'font-weight: 700'
+			].join(';'),
+			[ 
+				'margin: -5px 0 20px;',
+				'font-size: 12px', 
+				'font-family: Helvetica, sans-serif', 
+				'font-weight: 400'
+			].join(';')
+		);
+	</script>
+
+	<script src="{{ 'js-globals.js' | asset_url }}"></script>
+
+
+	{{ content_for_header }}
+
+	{% comment %}  inline CSS, to avoid style flash  {% endcomment %}
+	{% capture html_init %}
+		{% include 'html-css-reset' %}
+		{% include 'html-css-utilities' %}
+		{% include 'html-css-animations' %}
+		{% include 'html-css-first-paint' %}
+	{% endcapture %}
+
+	{{ html_init | strip_newlines | replace: '	', '' }}
+
+
+	<script>
+		const getRandomInt = (min, max) => {
+			min = Math.ceil(min);
+			max = Math.floor(max);
+			return Math.floor(Math.random() * (max - min)) + min;
+		};
+
+		// let videoArray = ["{{'pzaz-landing-1.mp4' | asset_url }}","{{'pzaz-landing-2.mp4' | asset_url}}","{{'pzaz-landing-3.mp4' | asset_url}}","{{'pzaz-landing-4.mp4' | asset_url}}"];
+		let colorArray = ["flavor-purple","flavor-blue","flavor-red","flavor-green"];
+
+		const initIndex = getRandomInt(1,4);
+
+		document.addEventListener('DOMContentLoaded', () => {
+			
+			const heroVideos = document.querySelectorAll('.hero-video');
+
+			const clearFlavor = index => {
+				document.querySelector('.hero-video.active').classList.remove('active');
+				root.classList.remove("flavor-purple","flavor-green","flavor-blue","flavor-red");
+			}
+				
+			const refreshFlavor = index => {
+				heroVideos[index].classList.add('active');
+				root.classList.add(colorArray[index]);
+			}
+
+			// swap flavor on load
+			refreshFlavor(initIndex);
+
+			// heroVideo.addEventListener('loadedmetadata', () => {
+			// 	// avoid reflow on src change
+			// 	heroVideo.style.minHeight = `${heroVideo.offsetHeight}px`;
+			// })
+
+			// avoid reflow on src change
+			// unless on mobile, where safari nav bar triggers it too often
+			// if(!responsive) {
+			// 	window.addEventListener('resize', () => {
+			// 		heroVideo.style.minHeight = 'unset';
+			// 		heroVideo.src = heroVideo.src;
+					
+			// 		setTimeout(() => {
+			// 			heroVideo.style.minHeight = `${heroVideo.offsetHeight}px`;
+			// 		}, 500)
+			// 	})
+			// }
+
+			// swap flavor on form select
+			// #downshift-0-item-[i] is generated through js
+			on('body', 'click', '#downshift-0-item-0', e => {
+				clearFlavor()
+				refreshFlavor(0);
+			});
+			on('body', 'click', '#downshift-0-item-1', e => {
+				clearFlavor()
+				refreshFlavor(1);
+			});
+			on('body', 'click', '#downshift-0-item-2', e => {
+				clearFlavor()
+				refreshFlavor(2);
+			});
+			on('body', 'click', '#downshift-0-item-3', e => {
+				clearFlavor()
+				refreshFlavor(3);
+			});
+
+		})
+
+		
+	
+	</script>
+  
+
+	</head>
+
+
+	<body>
+		<header id="header" class="fh fc fjb">
+			<div id="header-background" class="p-fill mobile-only"></div>
+			<a href="#faqs" class="btn">Info</a>
+          <img class="logo p-center" src="{{ 'logoNew.png' | asset_url }}" />
+			{% comment %} {% render 'svg-logo', class: 'p-center' %} {% endcomment %}
+			<a class="closeby-trigger btn">STORES {% render 'pinIcon' %}</a>
+		</header>
+          
+          <header id="header-mobile" class="fh fc fjb" style="display:none">
+              <a href="#faqs" class="btn">Info</a>
+              <a class="closeby-trigger btn">STORES {% render 'pinIcon' %}</a>
+          </header>
+
+		<main id="main">
+			<section id="hero" class="r">
+				<div id="hero-video-wrapper" class="r">
+					<video id="hero-video-1" class="hero-video r" autoplay muted loop playsinline>
+						<source src="{{'pzaz-landing-1.mp4' | asset_url}}" type="video/mp4">
+					</video>
+					<video id="hero-video-2" class="hero-video p-fill" autoplay muted loop playsinline>
+						<source src="{{'pzaz-landing-2.mp4' | asset_url}}" type="video/mp4">
+					</video>
+					<video id="hero-video-3" class="hero-video p-fill" autoplay muted loop playsinline>
+						<source src="{{'pzaz-landing-3.mp4' | asset_url}}" type="video/mp4">
+					</video>
+					<video id="hero-video-4" class="hero-video p-fill" autoplay muted loop playsinline>
+						<source src="{{'pzaz-landing-4.mp4' | asset_url}}" type="video/mp4">
+					</video>
+				</div>
+
+				{% render 'comp-signup' %}
+
+				<div id="mobile-buttons" class="hidden fh fc pl5 pr5 p3">
+					<a href="#faqs" class="btn">Info</a>
+					<button class="closeby-trigger btn">Buy Now</a>
+				</div>
+
+			</section>
+
+
+			{{content_for_layout}}
+
+		</main>
+          
+          <style>
+          	#header-mobile{
+              height: auto;
+            }
+          </style>
+
+		<script>
+			{% comment %}	prevent safari to load from cache	{% endcomment %}
+				window.onpageshow = function (event) {
+					if (event.persisted) {
+						window.location.reload();
+					}
+				};
+
+				{% comment %}	prevent chrome to load from cache	{% endcomment %}
+				const perfEntries = performance.getEntriesByType("navigation");
+				if (typeof (perfEntries[0]) != 'undefined') {
+					if (perfEntries[0].type === "back_forward") { 
+						location.reload(true)
+					}
+				}
+
+				{% comment %}	set dynamic css variables for announcement and header height	{% endcomment %}
+				const globalAnnouncement = document.querySelector('.global-announcement');
+				const globalHeader = document.querySelector('.global-header');
+
+				root.style.setProperty(
+					'--s-announcement', 
+					`${(globalAnnouncement ? globalAnnouncement.offsetHeight : 0)}px`
+				);
+
+				root.style.setProperty(
+					'--s-header', 
+					`${(globalHeader ? globalHeader.offsetHeight : 0)}px`
+				);
+
+				{% comment %}	set min container height to fill screen, so footer is always at bottom	{% endcomment %}
+				const globalFooter = document.querySelector('.global-footer');
+
+				main.style.minHeight = `calc(100vh - ${
+					(globalFooter ? globalFooter.offsetHeight : 0)}px)`;
+
+				{% comment %}	assign loaded state to root	{% endcomment %}
+				root.classList.add('is_loaded');
+			</script>
+          
+          <script>
+          Object.defineProperty(HTMLMediaElement.prototype, 'playing', {
+              get: function () {
+                  return !!(this.currentTime > 0 && !this.paused && !this.ended && this.readyState > 2);
+              }
+          });
+
+          jQuery('body').on('click touchstart', function () {
+              const videoElement = document.getElementById('hero-video-2');
+              if (videoElement.playing) {
+                  // video is already playing so do nothing
+              }
+              else {
+                  // video is not playing
+                  // so play video now
+                  videoElement.play();
+              }
+            
+            const videoElement2 = document.getElementById('hero-video-3');
+              if (videoElement2.playing) {
+                  // video is already playing so do nothing
+              }
+              else {
+                  // video is not playing
+                  // so play video now
+                  videoElement2.play();
+              }
+            
+            const videoElement3 = document.getElementById('hero-video-4');
+              if (videoElement3.playing) {
+                  // video is already playing so do nothing
+              }
+              else {
+                  // video is not playing
+                  // so play video now
+                  videoElement3.play();
+              }
+            
+            const videoElement4 = document.getElementById('hero-video-1');
+              if (videoElement4.playing) {
+                  // video is already playing so do nothing
+              }
+              else {
+                  // video is not playing
+                  // so play video now
+                  videoElement4.play();
+              }
+            
+            const videoElement5 = document.getElementById('hero-video-1-1');
+              if (videoElement5.playing) {
+                  // video is already playing so do nothing
+              }
+              else {
+                  // video is not playing
+                  // so play video now
+                  videoElement5.play();
+              }
+          });
+
+          </script>
+      
+
+      
+      <script>
+      document.body.addEventListener('touchstart', function(e){ e.preventDefault(); });
+      </script>
+      
+      <script>
+jQuery.post('/cart/clear.js')
+</script>
+          
+          <style>
+        #header-mobile{position:fixed;left: 0;top:0;margin: 0;
+          padding: var(--s-3) var(--s-5);
+        }
+        @media(max-width: 900px){
+          #header-mobile{
+            padding: var(--s-2) var(--s-2) var(--s-6);
+          }
+        }
+            @media(min-width: 990px){
+              #header-mobile{
+              	height: 125px;
+              }
+            }
+            html{
+            	background: #fff;
+              padding-bottom: 0!important;
+            }
+            body {
+              overflow-x: hidden!important;
+              background: #fff;
+            }
+            .slick-prev {
+                left: -14px!important;
+                z-index: 5!important;
+            }
+            .slick-next {
+    			right: -10px!important;
+            }
+            .slick-prev:before,.slick-next:before{
+            	color: #fff!important;
+            }
+            @media(min-width: 999px){
+              .slick-next{
+                  right: -20px!important;
+              }
+              .slick-prev{
+                  left: -20px!important;
+              }
+            }
+            @media(width:768px){
+              .logo{
+              	margin: 0 auto;
+                transform: translate(-50%, -50%);
+              }
+            }
+      </style>
+      <script>
+      	$(window).scroll(function(){
+          if ($(window).scrollTop() >= 300) {
+              $('#header-mobile').slideDown();
+            $('#header-mobile').css({"display":"flex"})
+          }
+          else {
+              $('#header-mobile').hide();
+
+          }
+      });
+      </script>
+			
+		{{ 'js-plugin-intersection-observer-polyfill.js' | asset_url | script_tag }}
+		{{ 'js-plugin-smooth-scroll-polyfill.js' | asset_url | script_tag }}
+		{{ 'js-plugin-lazysizes.js' | asset_url | script_tag }}
+		<script src="{{ 'js-scripts.js' | asset_url }}" defer></script>
+     
+	</body>
+</html>

@@ -1,0 +1,34 @@
+{% comment %}
+  The contents of the product.liquid template can be found in /sections/product-template.liquid
+{% endcomment %}
+
+{% layout 'index.product-page' %}
+{% section 'product-template-custom' %}
+{% section 'slider' %}
+<div class="ddivider w"></div>
+{% section 'reviews' %}
+<div class="ddivider"></div>
+{% section 'product-recommendations' %}
+{% section 'faqs' %}
+
+
+
+<style>
+.ddivider{
+  	position:relative;
+    display: block;
+    height: 1px;
+  }
+.ddivider:after{
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: -5px;
+    width: 100%;
+    height: 10px;
+    background: url(//cdn.shopify.com/s/files/1/0532/8234/1052/t/17/assets/svg-plus.svg?v=1368022…);
+    background-size: 15px 10px;
+    z-index: -1;
+}
+</style>
+

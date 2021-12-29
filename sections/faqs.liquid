@@ -1,0 +1,250 @@
+{% schema %}
+{
+	"name": "FAQs",
+	"tag": "section",
+	"class": "r z0",
+	"blocks": [
+		{
+			"type": "title",
+			"name": "FAQ Title",
+			"settings": [
+				{
+					"type": "text",
+					"id": "title",
+					"label": "Section Title",
+					"info": "Used to break up the FAQs into categories"
+				}
+			]
+		},
+		{
+			"type": "FAQ",
+			"name": "FAQ",
+			"settings": [
+				{
+					"type": "textarea",
+					"id": "question",
+					"label": "Question"
+				},
+				{
+					"type": "richtext",
+					"id": "answer",
+					"label": "Answer"
+				},
+				{
+					"type": "image_picker",
+					"id": "image",
+					"label": "Image",
+					"info": "Optional image placed below the body text. Remember to compress your images and add alt text for SEO and ADA purposes."
+				},
+				{
+					"type": "url",
+					"id": "url",
+					"label": "Link",
+					"info": "Turn the image into a hyperlink"
+				}
+			]
+		},
+		{
+			"type": "image",
+			"name": "Image",
+			"settings": [
+				{
+					"type": "image_picker",
+					"id": "solo_image",
+					"label": "Image",
+					"info": "Standalone image with an optional link around it. Remember to compress your images and add alt text for SEO and ADA purposes."
+				},
+				{
+					"type": "url",
+					"id": "solo_url",
+					"label": "Link",
+					"info": "Turn the image into a hyperlink"
+				}
+			]
+		}
+	]
+}
+{% endschema %}
+
+<div id="faqs" class="fh fjs fw">
+
+{% for block in section.blocks %}
+
+	{% assign title = block.settings.title %}
+	{% assign question = block.settings.question %}
+	{% assign answer = block.settings.answer %}
+	{% assign image = block.settings.image %}
+	{% assign url = block.settings.url %}
+	{% assign solo_image = block.settings.solo_image %}
+	{% assign solo_url = block.settings.solo_url %}
+
+	{% comment %} opening div for .faq-title div {% endcomment %}
+	{% if block.type == 'title' %}
+		<div class="faq-block">
+			<p class="faq-title t-b-1 cr-white">{{title}}</p>
+			<div class="faq-inner">
+	{% endif %}
+
+		{% if block.type == 'FAQ' %}
+			{% render 'comp-accordion', header: question, body: answer, image: image, url: url %}
+		{% endif %}
+
+		{% if block.type == 'image' %}
+			<div class="accordion-item accordion-item-solo">
+				
+				{% if solo_url != blank%}
+					<a href="{{solo_url}}">
+						<img class="lazyload" data-src="{{solo_image.src | img_url: '600x'}}" alt="{{solo_image.alt}}">
+					</a>
+				{% else %}
+					<img class="lazyload" data-src="{{solo_image.src | img_url: '600x'}}" alt="{{solo_image.alt}}">
+				{% endif %}
+				
+			</div>
+		{% endif %}
+
+	{% comment %} ending div for .faq-title div (if header is next, close the section){% endcomment %}
+	{% if section.blocks[forloop.index].type == 'title' or section.blocks[forloop.index] == blank %}</div></div>{% endif %}
+	
+{% endfor %}
+
+</div>
+
+
+<style>
+
+#faqs {
+	padding: var(--s-4);
+}
+
+.faq-block {
+	padding: var(--s-3);
+	flex: 50% 0 0;
+}
+
+.faq-title {
+	margin-bottom: var(--s-4);
+}
+
+.accordion-item {
+	width: 100%;
+	padding: var(--s-2);
+	overflow: hidden;
+	border: 4px solid var(--cr-black);
+	border-radius: 10px;
+	background-color: var(--cr-white);
+}
+
+	@media (min-width: 900px) {
+		.accordion-item:not(:last-of-type) {
+			margin-bottom: -4px;
+		}
+	}
+
+	.accordion-toggle,
+    .accordion-header{
+		width: 100%;
+		position: relative;
+		overflow: hidden;
+		text-align: left;
+        color: #000;
+	}
+
+	.accordion-header {
+		font: var(--t-l-1);
+		text-transform: uppercase;
+	}
+
+	.accordion-text {
+		max-height: 0px;
+		opacity: 0;
+		transition: max-height .5s cubic-bezier(0, 1, 0.74, 1), opacity .3s .3s;
+	}
+
+		.accordion-text > * {
+			padding: var(--s-3) 0 var(--s-2);
+		}
+
+		.accordion-item.expand .accordion-text {
+			max-height: 200vh;
+			opacity: 1;
+			transition: max-height .9s, opacity .3s;
+		}
+
+		.accordion-item img {
+			width: 100%;
+		}
+
+	@media (max-width: 900px) {
+		#faqs {
+			flex-direction: column;
+		}
+
+		.accordion-item {
+			margin-top: var(--s-3);
+			margin-bottom: var(--s-2);
+			transition: transform .25s;
+		}
+
+		.accordion-item:nth-of-type(odd) {
+			transform: rotate(.5deg)
+		}
+
+		.accordion-item:nth-of-type(even) {
+			transform: rotate(-.5deg)
+		}
+
+		.accordion-item:nth-of-type(3n) {
+			transform: rotate(.25deg)
+		}
+
+		.accordion-item:nth-of-type(4n) {
+			transform: rotate(-.25deg)
+		}
+
+		.accordion-item.expand {
+			transform: rotate(0) !important;
+		}
+	}
+
+	@media (max-width: 600px) {
+		#faqs {
+			padding: 0;
+		}
+
+		.faq-block:first-of-type {
+			padding-top: 0;
+		}
+
+		.faq-title {
+			margin-top: var(--s-4);
+			margin-bottom: var(--s-4);
+		}
+
+			.faq-title:first-of-type {
+				margin-top: 0;
+			}
+
+		.accordion-item {
+			margin-top: var(--s-4);
+		}
+
+		.accordion-item:nth-of-type(odd) {
+			transform: rotate(2deg)
+		}
+
+		.accordion-item:nth-of-type(even) {
+			transform: rotate(-1deg)
+		}
+
+		.accordion-item:nth-of-type(3n) {
+			transform: rotate(1deg)
+		}
+
+		.accordion-item:nth-of-type(4n) {
+			transform: rotate(-.5deg)
+		}
+
+	}
+
+</style>

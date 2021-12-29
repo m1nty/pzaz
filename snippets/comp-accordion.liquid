@@ -1,0 +1,20 @@
+<div class="accordion-item">
+
+	<button class="accordion-toggle" aria-label="Toggle accordion">
+		<p class="accordion-header">{{header}}</p>
+	</button>
+
+	<div class="accordion-text">
+		{{body}}
+		{% if image != blank%}
+			{% if url != blank%}
+				<a href="{{url}}">
+					<img class="lazyload" data-src="{{image.src | img_url: '600x'}}" alt="{{image.alt}}">
+				</a>
+			{% else %}
+				<img class="lazyload" data-src="{{image.src | img_url: '600x'}}" alt="{{image.alt}}">
+			{% endif %}
+		{% endif %}
+	</div>
+	
+</div>

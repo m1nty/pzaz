@@ -1,0 +1,186 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;600&display=swap" rel="stylesheet">
+
+<section class='newUniversity'>
+	
+  <h1 class="newUniversityTitle">
+    {{section.settings.title}}
+  </h1>
+  
+  <div class="dcontainer">
+    
+    <div class="newUniversityBody">
+    
+      <div class="newUniversityBodyLeft">
+      	<img src="{{section.settings.logo | img_url:'master'}}" />
+      </div>
+      <div class="newUniversityBodyRight">
+        <div class="newUniversityBodyRightTitle">
+        	{{ section.settings.title2}}
+        </div>
+        
+        <div class="newUniversityBodyRightText">
+        	{{section.settings.text}}
+        </div>
+        
+        <button data-tf-popup="FCQlS5jk" data-tf-hidden="utm_source=xxxxx" style="all:unset;font-family:Helvetica,Arial,sans-serif;display:inline-block;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background-color:#fff;border: 1px solid #000;color:#000;font-size:24px;padding:5px 43px;font-weight:bold;height:50px;cursor:pointer;line-height:50px;text-align:center;margin:0;text-decoration:none;font-family: 'EB Garamond', serif;">Apply Today</button>
+      
+      </div>
+
+    
+    </div>
+  </div>
+  
+  
+</section>
+
+
+<style>
+  .main-content{
+  	padding: 0;
+  }
+  .newUniversity{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  body{
+  	background: #fff!important;
+  }
+  .newUniversity{
+    min-height: 100vh;
+    box-sizing:border-box;
+  	padding: 25px 20px 180px 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    background-image: url("{{section.settings.bg | img_url:'master'}}");
+      background-size:cover;
+  }
+  .newUniversityBodyRightTitle{
+  	font-weight: 600;
+    font-size: 44px;
+    margin-bottom: 25px;
+    font-family: 'EB Garamond', serif;
+  }
+  .newUniversityBody{
+  	display:flex;
+  }
+  .newUniversityTitle{
+    width: 100%;
+    font-weight: 300;
+    text-align:center;
+    color: #000;
+    font-family: 'EB Garamond', serif;
+    font-size: 28px;
+    margin-bottom: 80px;
+  }
+  .newUniversityBodyLeft{
+  	width: 35%;
+  }
+  .newUniversityBodyLeft{
+  	width: 65%;
+  }
+  .newUniversityBodyLeft img{
+  	width: 70%;
+    display:block;
+    margin: auto;
+  }
+  .newUniversityBodyRightText{
+    font-family: 'EB Garamond', serif;
+    font-size: 18px;
+    margin-bottom: 40px;
+  }
+  .site-wrapper{
+  	padding: 0!important;
+  }
+  .grid__item{
+  	width: 100%!important;
+  }
+  .site-footer,
+  .shopify-section-sidebar,
+  #shopify-section-header,
+  #shopify-section-sidebar{
+  	display:none!important;
+  }
+  @media(max-width: 768px){
+    .newUniversityBody{
+      flex-wrap:wrap;      
+    }
+    .newUniversityBodyLeft,
+    .newUniversityBodyRight{
+      width: 100%;
+    }
+    .newUniversityBodyLeft img{
+      width: 220px;
+    }
+    .newUniversityBodyRightText{
+    	font-size: 24px;
+    }
+    .newUniversity{
+    	padding-bottom: 100px;
+    }
+  }
+  
+  @media(max-width: 500px){
+    .newUniversityBodyRightText{
+    	font-size: 20px;
+    }
+    .newUniversityTitle{
+      font-size: 10px;
+    }
+    .newUniversityBodyLeft img{
+      width: 120px;
+    }
+    .newUniversityBodyRightTitle{
+      font-size: 24px;
+      line-height: 1.2;
+      margin: 25px 0;
+    }
+    .newUniversityBodyRightText{
+    	font-size: 18px;
+      	line-height: 1.8;
+    }
+    .newUniversityBodyRight button{
+      display:block!important;
+      margin: auto!important;
+    }
+  }	
+</style>
+
+{% schema %}
+  {
+    "name": "New University",
+    "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Logo"
+        },
+        {
+          "type": "image_picker",
+          "id": "bg",
+          "label": "Background"
+        },
+        {
+          "type": "text",
+          "id": "title2",
+          "label": "Title 2"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text"
+        }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,33 @@
+<div data-product="{{ product | json | escape }}" data-handle="{{ product.handle }}" class="sealsubs-target-element"></div>
+
+<div class="slsDcustom">
+
+  <div class="slsDcustomCurrnet">
+    EVERY 2 WEEKS
+  </div>
+  
+  <ul class="slsDcustomUl">
+    <li class="slsDcustomUlLi" value="642908348">EVERY 2 WEEKS</li>
+    <li class="slsDcustomUlLi" value="642941116">EVERY MONTH</li>
+  </ul>
+
+</div>
+
+<style>
+  
+</style>
+
+<script>
+  $('.slsDcustomCurrnet').click(function(){
+  	$('.slsDcustomUl').toggle();
+  });
+  
+  $('.slsDcustomUlLi').click(function(){
+    let val = $(this).attr('value');
+    let text = $(this).text();
+
+    $('.slsDcustomCurrnet').html(text);    
+  	$('input[name="selling_plan"]').attr('value', val);
+    $('.slsDcustomUl').hide();
+  })
+</script>

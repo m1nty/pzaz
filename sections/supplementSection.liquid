@@ -1,0 +1,478 @@
+<section class="supplementSection">
+  {% if section.settings.title %}
+  <h3 class="supplementSectionTitle">
+  	{{ section.settings.title}}
+  </h3>
+  {% endif %}
+     
+
+
+  <div class="supplementSectionSlider">
+    {% for block in section.blocks %}
+      {% case block.type %}
+        {% when 'textt1' %}
+          <div class="supplementSectionSliderItem textt1">
+    		{{ block.settings.html}}
+          </div>
+    
+        {% when 'textt2' %}
+          <div class="supplementSectionSliderItem textt2">
+            {{ block.settings.html}}
+          </div>
+    
+      {% endcase %}
+    {% endfor %}
+    
+    
+  
+  </div>
+</section>
+<link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet" />
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+  @charset 'UTF-8';
+/* Slider */
+.slick-loading .slick-list
+{
+    background: #fff url('./ajax-loader.gif') center center no-repeat;
+}
+
+/* Icons */
+@font-face
+{
+    font-family: 'slick';
+    font-weight: normal;
+    font-style: normal;
+
+    src: url('./fonts/slick.eot');
+    src: url('./fonts/slick.eot?#iefix') format('embedded-opentype'), url('./fonts/slick.woff') format('woff'), url('./fonts/slick.ttf') format('truetype'), url('./fonts/slick.svg#slick') format('svg');
+}
+/* Arrows */
+.slick-prev,
+.slick-next
+{
+  z-index: 99!important;
+    font-size: 0;
+    line-height: 0;
+    position: absolute;
+    top:  calc(50% - 5px)!important;
+
+    display: block;
+
+    width: 27px;
+    height: 40px;
+    padding: 0;
+    -webkit-transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+
+    cursor: pointer;
+
+    color: transparent;
+    border: none;
+    outline: none;
+    background: transparent;
+    
+  	font-family: 'Font Awesome 5 Free'!important;
+    font-weight: 900;
+}
+.slick-prev:hover,
+.slick-prev:focus,
+.slick-next:hover,
+.slick-next:focus
+{
+    color: transparent;
+    outline: none;
+    background: transparent;
+}
+.slick-prev:hover:before,
+.slick-prev:focus:before,
+.slick-next:hover:before,
+.slick-next:focus:before
+{
+    opacity: 1;
+}
+.slick-prev.slick-disabled:before,
+.slick-next.slick-disabled:before
+{
+    opacity: .25;
+}
+
+.slick-prev:before,
+.slick-next:before
+{
+    font-size: 20px;
+    line-height: 1;
+
+    opacity: 1;
+    color: white;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  z-index: 99;
+}
+
+.supplementSection .slick-prev
+{
+    left: -45px!important;
+}
+[dir='rtl'] .slick-prev
+{
+    right: -25px;
+    left: auto;
+}
+.slick-next:before{content:"\f105" !important;font-family:stamped-font !important;font-size:40px !important;font-weight: 400;}
+[dir='rtl'] .slick-prev:before
+{
+    content: '→';
+}
+
+.supplementSection .slick-next
+{
+    right: -45px!important;
+}
+[dir='rtl'] .slick-next
+{
+    right: auto;
+    left: -25px;
+}
+.slick-prev:before{content:"\f104" !important;font-family:stamped-font !important;font-size:40px !important;font-weight: 400;}
+[dir='rtl'] .slick-next:before
+{
+    content: '←';
+}
+
+/* Dots */
+.slick-dotted.slick-slider
+{
+    margin-bottom: 30px;
+}
+
+.slick-dots
+{
+    position: absolute;
+    bottom: -25px;
+
+    display: block;
+
+    width: 100%;
+    padding: 0;
+    margin: 0;
+
+    list-style: none;
+
+    text-align: center;
+}
+.slick-dots li
+{
+    position: relative;
+
+    display: inline-block;
+
+    width: 20px;
+    height: 20px;
+    margin: 0 5px;
+    padding: 0;
+
+    cursor: pointer;
+}
+.slick-dots li button
+{
+    font-size: 0;
+    line-height: 0;
+
+    display: block;
+
+    width: 20px;
+    height: 20px;
+    padding: 5px;
+
+    cursor: pointer;
+
+    color: transparent;
+    border: 0;
+    outline: none;
+    background: transparent;
+}
+.slick-dots li button:hover,
+.slick-dots li button:focus
+{
+    outline: none;
+}
+.slick-dots li button:hover:before,
+.slick-dots li button:focus:before
+{
+    opacity: 1;
+}
+.slick-dots li button:before
+{
+    font-size: 6px;
+    line-height: 20px;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 20px;
+    height: 20px;
+
+    content: '•';
+    text-align: center;
+
+    opacity: .25;
+    color: black;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.slick-dots li.slick-active button:before
+{
+    opacity: .75;
+    color: black;
+}
+  .supplementSectionSliderItem{
+  	text-align:center;
+  }
+  .supplementSectionSlider{
+    max-width: 500px;
+    margin: auto;
+    padding: 2px;
+/*     border: 5px dotted #000; */
+    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='black' stroke-width='4' stroke-dasharray='2%2c 8' stroke-dashoffset='0' stroke-linecap='butt'/%3e%3c/svg%3e");
+  }
+  .supplementSectionSliderItem{
+  	padding: 15px;
+    background: rgb(255, 255, 0);
+    margin: auto;
+    max-height: 207px;
+  }
+  .supplementSection{
+  	padding: 50px 15px;
+    margin: auto;
+    max-width: 1200px;
+    box-sizing:border-box;
+  }
+  .supplementSectionTitle{
+    text-align: center;
+    margin:0;
+    font: var(--t-l-1);
+    text-transform: uppercase;
+    font-size: 32px!important;
+  }
+  .supplementSectionSliderItem.textt1 p{
+    font: var(--t-l-1);
+  	font-size: 22px;
+    font-weight: 700;
+    border-bottom: 2px solid #ff03cd;
+    padding: 4px 0;
+    font-family: 'Space Grotesk', sans-serif!important;
+    letter-spacing: 0;
+    text-shadow: 0px 0px 0px #000;
+  }
+  .supplementSectionSliderItem.textt1 p:last-child{
+  	border-bottom: 0;
+  }
+  .supplementSectionSliderItem.textt2{
+  	text-align:left;
+  }
+  .supplementSectionSliderItem.textt2 p{
+  	font-size: 22px;
+    line-height: 1.45;
+    font-weight: 500;
+    font-family: 'Space Grotesk', sans-serif!important;
+  }
+  
+  @media(max-width: 769px){
+    .supplementSectionSliderItem.textt2 p{
+    	font-size: 20px;
+    }
+  }
+  
+  @media(max-width: 420px){
+    .supplementSectionSliderItem.textt2 p{
+    	font-size: 16px;
+    }
+    .supplementSectionSliderItem.textt1 p{
+    	font-size: 17px!important;
+      padding: 4px 0;
+      font-weight: 700;
+    }
+    .supplementSectionSliderItem.textt1 p:nth-child(1){
+      font-size: 16px!important;
+    }
+    .supplementSectionSliderItem.textt1 p:nth-child(2),
+    .supplementSectionSliderItem.textt1 p:nth-child(3){
+      font-size: 23px!important;
+    }
+    .supplementSectionSliderItem{
+    	padding: 10px;
+    }
+    .supplementSectionSliderItem.textt1 p:first-child{
+    	padding-top: 0;
+    }
+    .supplementSectionSliderItem.textt1 p:last-child{
+    	padding-bottom: 0!important;
+    }
+  }
+  
+/*   @media(max-width: 400px){
+    .supplementSectionSliderItem.textt2 p{
+    	font-size: 12px;
+    }
+  } */
+  
+  .flavor-green .supplementSectionSliderItem.textt1 p{
+  	border-color:#37E700!important
+  }
+  .flavor-green .supplementSectionSliderItem.textt1 p b{
+    color: #37E700!important;
+  }
+  
+  .flavor-blue .supplementSectionSliderItem.textt1 p{
+  	border-color:#00D0EE!important
+  }
+  .flavor-blue .supplementSectionSliderItem.textt1 p b{
+    color: #00D0EE!important;
+  }
+  
+  .flavor-red .supplementSectionSliderItem.textt1 p{
+  	border-color:#FE2A6B!important
+  }
+  .flavor-red .supplementSectionSliderItem.textt1 p b{
+    color: #FE2A6B!important;
+  }
+  
+  .flavor-purple .supplementSectionSliderItem.textt1 p{
+  	border-color:#ff03cd!important
+  }
+  .flavor-purple .supplementSectionSliderItem.textt1 p b{
+    color: #ff03cd!important;
+  }
+@keyframes border-dance {
+  0% {
+    background-position: 0px 0px, 300px 116px, 0px 150px, 216px 0px;
+  }
+  100% {
+    background-position: 300px 0px, 0px 116px, 0px 0px, 216px 150px;
+  }
+}
+  
+  @media(min-width: 999px){
+    .supplementSectionSliderItem{
+    	height: 201px!important;
+    }
+  }
+  @media(width: 375px){
+    .supplementSectionSliderItem.textt1 p:nth-child(3){
+    	font-size: 22px!important;
+    }
+  }
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script>
+  $('.supplementSectionSlider').slick({
+  	infinite: true,
+    slidesToShow: 1,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    arrows:true,
+    adaptiveHeight: true,
+    responsive: [
+    {
+      breakpoint: 800,
+      settings: {
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+      }
+    }
+  ]
+  })
+</script>
+
+{% schema %}
+  {
+    "name": "Supplement Section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      }
+	],
+	"blocks":[
+       {
+         "name": "TEXT TYPE 1",
+         "type": "textt1",
+         "settings": [
+           {
+             "type": "html",
+             "id": "html",
+             "label": "html"
+           }
+         ]
+       },
+       {
+         "name": "TEXT TYPE 2",
+         "type": "textt2",
+         "settings": [
+           {
+             "type": "html",
+             "id": "html",
+             "label": "html"
+           }
+         ]
+       }
+	]
+  }
+{% endschema %}
+
+<style>
+.stretch_it{
+    white-space: nowrap;
+}
+.justify{
+    text-align:justify;
+}
+</style>
+<script>
+$.fn.strech_text = function(){
+    var elmt          = $(this),
+        cont_width    = elmt.width(),
+        txt           = elmt.html(),
+        one_line      = $('<span class="stretch_it">' + txt + '</span>'),
+        nb_char       = elmt.text().length,
+        spacing       = cont_width/nb_char,
+        txt_width;
+    
+    elmt.html(one_line);
+    txt_width = one_line.width();
+    
+    if (txt_width < cont_width){
+        var  char_width     = txt_width/nb_char,
+             ltr_spacing    = spacing - char_width + (spacing - char_width)/nb_char ; 
+  
+        one_line.css({'letter-spacing': ltr_spacing});
+    } else {
+        one_line.contents().unwrap();
+        elmt.addClass('justify');
+    }
+};
+
+
+$(document).ready(function () {
+    $('.stretch').each(function(){
+        $(this).strech_text();
+    });
+});
+</script>
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

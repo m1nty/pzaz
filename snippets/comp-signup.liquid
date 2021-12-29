@@ -1,0 +1,298 @@
+
+<div class="klaviyo-form-VUzHYC"></div>
+
+
+
+<style>
+
+  .needsclick{
+  font: var(--t-l-1)!important;
+    font-size: 16px!important;
+    height: 23px!important;
+  }
+.needsclick::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  font: var(--t-l-1)!important;
+    font-size: 16px!important;
+}
+.needsclick::-moz-placeholder { /* Firefox 19+ */
+  font: var(--t-l-1)!important;
+  font-size: 16px!important;
+}
+.needsclick:-ms-input-placeholder { /* IE 10+ */
+  font: var(--t-l-1)!important;
+      font-size: 16px!important;
+
+}
+.needsclick:-moz-placeholder { /* Firefox 18- */
+  font: var(--t-l-1)!important;
+      font-size: 16px!important;
+
+}
+</style>
+
+
+{% comment %}
+
+custom/legacy form embed does not generate consent status
+se must use the default embed instead and override the css (below)
+
+<form id="klaviyo-signup" action="//manage.kmail-lists.com/subscriptions/subscribe" data-ajax-submit="//manage.kmail-lists.com/ajax/subscriptions/subscribe" method="GET" target="_blank" novalidate="novalidate">
+
+	<input type="hidden" name="g" value="SbJtwM">
+	<input type="hidden" name="$fields" value="$consent">
+	<input type="hidden" name="$list_fields" value="$consent">
+
+	<div class="newsletter-form-inputs">
+
+		<div class="newsletter-form-input input-email">
+			<label class="t-h-3" for="section-newsletter-email">Subscribe to the newsletter</label>
+			<input id="section-newsletter-email" type="email" name="email" placeholder="Your email, please">
+		</div>
+
+		<div class="newsletter-form-input">
+			<label class="screen-reader-only" for="signup-phone">Receive SMS Updates</label>
+			<input id="signup-phone" type="tel" name="phone_number" placeholder="Phone Number">
+		</div>
+
+		<label class="screen-reader-only" for="Favorite Flavor">Favorite Flavor</label>
+		<select name="Favorite Flavor">  
+			<option value="Peach">EVERYTHING’S PEACHY</option>  
+			<option value="Mint">MINT CONDITION</option>  
+			<option value="Strawberry">STRAWBERRY FIELDS</option>  
+			<option value="Sour Apple">BIG APPLE ENERGY</option>  
+		</select>
+		
+	</div>
+
+	<button class="btn" type="submit">Submit</button>
+
+	<p>Upon sign-up, you agree to receive text messages from us at the number provided. Message and data rates may apply. Message frequency varies. Reply HELP for help or STOP to cancel. View our Privacy Policy and Terms of Service.</p>
+	
+</form>
+
+<script type="text/javascript" src="//www.klaviyo.com/media/js/public/klaviyo_subscribe.js"></script>
+<script type="text/javascript">
+	KlaviyoSubscribe.attachToForms('#klaviyo-signup', {
+		hide_form_on_success: true,
+		success: function(data) {
+			document.getElementById('klaviyo-signup').classList.add('is-success')
+		}
+	});
+</script>
+
+{% endcomment %}
+
+
+{% comment %}
+
+hidden klaviyo dropdown component that disappears on blur
+
+<div maxheight="150" role="listbox" aria-labelledby="downshift-0-label" id="downshift-0-menu" class="needsclick DropdownComponents__Items-drv7zj-4 ecDBPG kl-private-reset-css-Xuajs1">
+	<div id="downshift-0-item-0" role="option" aria-selected="false" class="needsclick DropdownComponents__Item-drv7zj-5 csEreK kl-private-reset-css-Xuajs1">EVERYTHING’S PEACHY</div>
+	<div id="downshift-0-item-1" role="option" aria-selected="false" class="needsclick DropdownComponents__Item-drv7zj-5 csEreK kl-private-reset-css-Xuajs1">MINT CONDITION</div>
+	<div id="downshift-0-item-2" role="option" aria-selected="false" class="needsclick DropdownComponents__Item-drv7zj-5 csEreK kl-private-reset-css-Xuajs1">STRAWBERRY FIELDS</div>
+	<div id="downshift-0-item-3" role="option" aria-selected="false" class="needsclick DropdownComponents__Item-drv7zj-5 csEreK kl-private-reset-css-Xuajs1">BIG APPLE ENERGY</div>
+	</div>
+
+{% endcomment %}
+
+
+
+<style>
+
+	/* form wrapper */
+	.klaviyo-form-VUzHYC {
+		width: min(450px, 100%);
+		position: absolute;
+		bottom: var(--s-4);
+		left: var(--s-5);
+		z-index: 2;
+	}
+
+	/* form element */
+	.klaviyo-form-VUzHYC .eabhAg {
+		overflow: visible !important;
+		opacity: 0;
+		transform: translateY(45px);
+		animation: fadeInUp .3s both !important;
+	}
+
+	.klaviyo-form-VUzHYC button[type="button"] {
+		font: var(--t-l-1) !important;
+		text-transform: uppercase !important;
+		transition: background-color .25s !important;
+        margin-top: 10px;
+	}
+	
+	/* sms and flavor fields */
+	/* sms field */
+	/* PhoneNumberInputComponents__StyledPhoneInputContainer */
+	.klaviyo-form-VUzHYC .beauDx,
+	/* sms error field */
+	.klaviyo-form-VUzHYC .hEiomA,
+	/* flavor fields */
+	.klaviyo-form-VUzHYC .kKHebi,
+	/* flavor dropdown state */
+	.klaviyo-form-VUzHYC .fforLz {
+		border: 4px solid var(--cr-black) !important;
+		border-radius: 10px !important;
+		overflow: hidden !important;
+		padding: 0 !important;
+		height: unset !important;
+		-webkit-appearance: none !important;
+	}
+
+	/* empty top div field */
+	.klaviyo-form-VUzHYC .iwGbeA {
+		display: none !important;
+	}
+
+	#downshift-0-menu {
+		border: 4px solid var(--cr-black) !important;
+		border-radius: 10px !important;
+		/* slightly hide underneath dropdown border */
+		padding-top: 10px !important;
+		transform: translateY(10px) !important;
+		max-height: 250px !important;
+		overflow: scroll !important;
+	}
+
+		/* toggleable flavor dropdown menu */
+		#downshift-0-menu div {
+			padding: var(--s-1) var(--s-3) !important;
+			font: var(--t-l-1) !important;
+			transition: color .25s;
+		}
+
+			#downshift-0-menu div:last-of-type {
+				padding-bottom: var(--s-3) !important;
+			}
+
+			#downshift-0-item-0:hover {
+				color: var(--cr-purple-light);
+			}
+
+			#downshift-0-item-1:hover {
+				color: var(--cr-blue-light);
+			}
+
+			#downshift-0-item-2:hover {
+				color: var(--cr-red-light);
+			}
+
+			#downshift-0-item-3:hover {
+				color: var(--cr-green-light);
+			}
+
+			/* flavor chevron */
+			.klaviyo-form-VUzHYC .bxnFoA {
+				margin-right: 10px !important;
+				position: absolute;
+				right: var(--s-1);
+				transition: transform .25s;
+			}
+
+		.klaviyo-form-VUzHYC .beauDx input,
+		/* sms error state */
+		.klaviyo-form-VUzHYC .hEiomA input,
+		.klaviyo-form-VUzHYC .kKHebi input,
+		.klaviyo-form-VUzHYC .fforLz > *:not(svg) {
+			font: var(--t-l-1) !important;
+			padding: var(--s-2) var(--s-3) !important;
+            appearance: none !important;
+            -webkit-appearance: none !important;
+              border-radius: 10px!important;
+		}
+
+		.klaviyo-form-VUzHYC .fforLz * {
+			font: var(--t-l-1) !important;
+		}
+
+		/* success message */
+		.klaviyo-form-VUzHYC .itrmhl * {
+			font: var(--t-l-1) !important;
+		}
+
+		/* disclaimer message */
+		.klaviyo-form-VUzHYC .iBnKPa * {
+			font: var(--t-b-3) !important;
+		}
+
+			/* disclaimer message */
+		.klaviyo-form-VUzHYC .iBnKPa .ql-editor {
+			min-height: 60px;
+		}
+
+		.klaviyo-form-VUzHYC .beauDx input::placeholder,
+		.klaviyo-form-VUzHYC .hEiomA input::placeholder,
+		.klaviyo-form-VUzHYC .kKHebi input::placeholder,
+		.klaviyo-form-VUzHYC .fforLz input::placeholder{
+			font: var(--t-l-1) !important;
+		}
+
+			/* sms placeholder */
+			.klaviyo-form-VUzHYC .beauDx input::placeholder {
+				color: var(--cr-gray)!important;
+			}
+			
+			/* flavor placeholder */
+			.klaviyo-form-VUzHYC .kKHebi input::placeholder {
+				color: var(--cr-black)!important;
+			}
+
+	/* flavor field */
+	.klaviyo-form-VUzHYC .kKHebi {}
+	
+	/* sms field: flag */
+	/* needsclick PhoneNumberInputComponents__DropdownIcon-sc-13l4vul-1 */
+	.klaviyo-form-VUzHYC .jNnrCO {
+		display: none !important;
+	}
+
+
+	@media (max-width: 900px) {
+		.klaviyo-form-VUzHYC {
+			/* center in middle of hero video divider and bottom of mobile screen */
+			margin: 6vh auto;
+			position: relative;
+			bottom: unset;
+			left: unset;
+			padding: 0 var(--s-2);	
+		}
+
+		/* form element */
+		.klaviyo-form-VUzHYC .eabhAg {
+			padding-bottom: 0 !important;
+			padding-left: 0 !important;
+			padding-right: 0 !important;
+		}
+
+		/* disclaimer message */
+		.klaviyo-form-VUzHYC .iBnKPa .ql-editor {
+			min-height: 70px;
+		}
+
+		/* reduce each field's padding */
+		[data-testid="form-row"] > * {
+			padding: var(--s-1) 0 !important;
+		}
+
+		/* submit button */
+		.klaviyo-form-VUzHYC .bnSZjX {
+			padding-top: 0 !important;
+		}
+
+		.klaviyo-form-VUzHYC .beauDx input,
+		/* sms error state */
+		.klaviyo-form-VUzHYC .hEiomA input,
+		.klaviyo-form-VUzHYC .kKHebi input,
+		.klaviyo-form-VUzHYC .fforLz > *:not(svg) {
+			padding-right: 0 !important;
+		}
+
+	}
+
+
+
+
+</style>

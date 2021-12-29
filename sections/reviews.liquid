@@ -1,0 +1,169 @@
+<div class="drtitle">
+	EVERY SINGLE REVIEW
+</div>
+<!-- <div class="drsubtitle">
+  AVERAGE <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> <br>NO REVIEWS HIDDEN
+</div> -->
+
+<div id="stamped-main-widget" class="stamped-main-widget" data-widget-style="standard" data-product-id="{{ product.id }}" data-name="{{ product.title | escape }}" data-url="{{ shop.url }}{{ product.url }}" data-image-url="{{ product.featured_image | product_img_url: "large" |replace: '?', '%3F' | replace: '&','%26'}}" data-description="{{ product.description | escape }}" data-product-sku="{{product.handle}}" data-product-type="{{product.type}}" data-widget-language="{{shop.locale}}">{{ product.metafields.stamped.reviews }}</div>
+
+{% if product.metafields.stamped.reviews_count and product.metafields.stamped.reviews_count != "0" %}
+<div style="height: 0!important;    visibility: hidden;">
+"aggregateRating": {
+"@type": "AggregateRating",
+"ratingValue": {{ product.metafields.stamped.reviews_average | round:2 }},
+"reviewCount": {{product.metafields.stamped.reviews_count}}
+}
+</div>
+{% endif %}
+
+
+<style>
+  @media(max-width: 769px){
+    .riska{
+    	display:none!important;
+    }
+  }
+  @media(min-width: 769px){
+    .drsubtitle br{
+    	display:none!important;
+    }
+  }
+  .drsubtitle .stars{
+  	font-size: 38px!important;
+    font: var(--t-b-2);
+  }
+  .drtitle{
+  	text-align:center;
+    margin-top: 6vh;
+    font-family: 'Druk', Helvetica, Helvetica, sans-serif;
+    font: var(--t-l-1);
+    text-transform: uppercase;
+    font-size: 32px!important;
+    letter-spacing: 2px;
+  }
+  .drsubtitle{
+    color: #fff;
+  	text-align:center;
+    margin-top: 2vh;
+    font-family: 'Space Mono', Helvetica, Helvetica, sans-serif;
+    font-size: 29px!important;
+        font: var(--t-b-2);
+  }
+  div.stamped-container[data-widget-style], div[data-widget-style] div.stamped-container{
+  	margin: 1vh auto!important;
+  }
+  .stamped-summary,
+  .stamped-tab-container,
+  .stamped-tabs,
+  .stamped-reviews-filter,
+  .stamped-header{
+  	display:none!important;
+    height: 0!important;
+  }
+  .stamped-review{
+  	background-color: #fff;
+    border: 4px solid #000!important;
+    border-radius: 30px;
+    box-shadow: none!important;
+    filter: drop-shadow(0 5px 0 #000)!important;
+    padding: 10px!important;
+  }
+  .stamped-review-body,
+  .stamped-review-content-body,
+  .stamped-review-content{
+  	margin-bottom: 0!important;
+  }
+  .stamped-review-content-body{
+  	font-size: 16px!important;
+    height: 60px;
+    overflow-y: scroll;
+  }
+  .stamped-review-body>.stamped-review-header-title{
+  	margin: 23px 0!important;
+    min-height: auto!important;
+    font-size: 21px!important;
+    text-align: center!important;
+    line-height: 1.2!important;
+    font-family: 'Druk', Helvetica, Helvetica, sans-serif!important;
+    font: var(--t-l-1);
+    text-transform: uppercase;
+  }
+  .stamped-review-content-body{
+  	margin-top: 24px!important;
+    font-family: 'Space Mono', Helvetica, Helvetica, sans-serif;
+  }
+  .stamped-verified-badge{
+  	text-transform: uppercase;
+  }
+  .stamped-review-header{
+  	display:flex;
+    width: 100%;
+    min-height: auto!important;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-top: 24px;
+    flex-direction: row-reverse;
+  }
+  .stamped-review-header-starratings{
+  	margin-bottom: 0!important;
+  }
+  .stamped-review-content-body{
+    min-height: auto!important;
+  }
+  
+  .stamped-review{
+  	display:flex!important;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: center;
+  }
+  .author{
+  	position:absolute;
+    font-family: 'Druk', Helvetica, Helvetica, sans-serif;
+    top: 10px;
+    left: 10px;
+    font-size: 17px;
+    text-transform: uppercase;
+    font: var(--t-l-1);
+  }
+  .stamped-review-header div:last-child{
+  	display:none!important;
+  }
+  .stamped-review:nth-child(odd) {
+    transform: rotate(2deg);
+  }
+  .stamped-review:nth-child(even) {
+    transform: rotate(-2deg);
+  }
+  .stamped-review-header .stamped-verified-badge[data-type=buyer][data-verified-label]:after{
+  	content: 'VERIFIED ZAZZSTER';
+    font-weight: 700;
+    font-style: italic;
+  }
+  [data-widget-style=slider] .slick-next.slick-disabled:before, [data-widget-style=slider] .slick-prev.slick-disabled:before{
+  	opacity: 0!important;
+  }
+  [data-widget-style=slider] .slick-next:before, [data-widget-style=slider] .slick-prev:before{
+  	opacity: 1!important;
+    font-weight: 400;
+  }
+  [data-widget-style=slider] .slick-next, [data-widget-style=slider] .slick-prev{
+  	top: calc(50% - 20px);
+    height: 40px;
+  }
+  
+</style>
+
+{% schema %}
+  {
+    "name": "Section name",
+    "settings": []
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

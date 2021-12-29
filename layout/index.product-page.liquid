@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html class="supports-no-js" lang="{{ request.locale.iso_code }}">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>
+    {{ shop.name }}
+  </title>
+
+  {% if settings.favicon %}
+    <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png" />
+  {% endif %}
+
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+
+  <link rel="canonical" href="{{ canonical_url }}">
+
+  {% include 'social-meta-tags' %}
+
+	<script>
+		// site variables
+		const siteUrl = '{{ shop.url }}';
+        const root = document.documentElement;
+		document.documentElement.classList.add('flavor-yellow-bg');      
+        
+	</script>
+
+	<script src="{{ 'js-globals.js' | asset_url }}"></script>
+
+	{{ content_for_header }}
+  
+    {{ 'theme-custom.scss.css' | asset_url | stylesheet_tag }}
+  
+  
+
+	{% comment %}  inline CSS, to avoid style flash  {% endcomment %}
+	{% capture html_init %}
+		{% include 'html-css-reset' %}
+		{% include 'html-css-utilities' %}
+		{% include 'html-css-animations' %}
+		{% include 'html-css-first-paint' %}
+	{% endcapture %}
+
+	{{ html_init | strip_newlines | replace: '	', '' }}
+  	{{ 'jquery-1.11.0.min.js' | asset_url | script_tag }}
+  
+
+  
+	</head>
+
+
+	<body>
+
+		<div class="site-wrapper product-page">
+          <header id="header" class="fh fc fjb">
+              <div id="header-background" class="p-fill mobile-only"></div>
+              <a href="/">
+                {% comment %}
+                {% render 'svg-logo' %}
+                {% endcomment %}
+                <img class="logo" style="width: 280px"  src="{{ 'logoNew.png' | asset_url }}" />
+            </a>
+              <a href="#faqs" class="btn info-btn">Info</a>
+          </header>
+          
+          <header id="header-mobile" class="fh fc fjb" style="display:none">
+              <div id="header-background" class="p-fill mobile-only"></div>
+              <a href="/">
+            {% comment %}
+                {% render 'svg-logo' %}
+                {% endcomment %}
+                <img class="logo" style="width: 280px"  src="{{ 'logoNew.png' | asset_url }}" />
+              </a>
+              <a href="#faqs" class="btn info-btn">Info</a>
+          </header>
+          
+          
+      		<div class="grid">
+
+            <main class="main-content grid__item" id="MainContent" role="main">
+              {% if settings.show_breadcrumb_nav and request.page_type != 'index' %}
+                {% include 'breadcrumb-nav' %}
+              {% endif %}
+              {{ content_for_layout }}
+            </main>
+
+          </div>
+      </div>
+
+		<script>
+			{% comment %}	prevent safari to load from cache	{% endcomment %}
+				window.onpageshow = function (event) {
+					if (event.persisted) {
+						window.location.reload();
+					}
+				};
+
+				{% comment %}	prevent chrome to load from cache	{% endcomment %}
+				const perfEntries = performance.getEntriesByType("navigation");
+				if (typeof (perfEntries[0]) != 'undefined') {
+					if (perfEntries[0].type === "back_forward") { 
+						location.reload(true)
+					}
+				}
+
+				{% comment %}	set dynamic css variables for announcement and header height	{% endcomment %}
+				const globalAnnouncement = document.querySelector('.global-announcement');
+				const globalHeader = document.querySelector('.global-header');
+
+				root.style.setProperty(
+					'--s-announcement', 
+					`${(globalAnnouncement ? globalAnnouncement.offsetHeight : 0)}px`
+				);
+
+				root.style.setProperty(
+					'--s-header', 
+					`${(globalHeader ? globalHeader.offsetHeight : 0)}px`
+				);
+
+				{% comment %}	set min container height to fill screen, so footer is always at bottom	{% endcomment %}
+				const globalFooter = document.querySelector('.global-footer');
+
+				main.style.minHeight = `calc(100vh - ${
+					(globalFooter ? globalFooter.offsetHeight : 0)}px)`;
+
+				{% comment %}	assign loaded state to root	{% endcomment %}
+				root.classList.add('is_loaded');
+			</script>
+        {{ 'modernizr.min.js' | asset_url | script_tag }}
+        {{ 'lazysizes.min.js' | asset_url | script_tag }}	
+		{{ 'js-plugin-intersection-observer-polyfill.js' | asset_url | script_tag }}
+		{{ 'js-plugin-smooth-scroll-polyfill.js' | asset_url | script_tag }}
+		{{ 'js-plugin-lazysizes.js' | asset_url | script_tag }}
+		<script src="{{ 'js-scripts.js' | asset_url }}" defer></script>
+      {% if request.page_type == 'product' or request.page_type == 'index' %}
+    {{ 'option_selection.js' | shopify_asset_url | script_tag }}
+    <script>
+      // Set a global variable for theme.js to use on product single init
+      window.theme = window.theme || {};
+      theme.moneyFormat = {{ shop.money_format | json }};
+      theme.productSingleObject = {{ product | json }};
+      
+      $('.option-selector-trigger').on('click', function(e) {
+        e.stopPropagation();
+        $('.custom-options-selector').toggleClass('active');
+            $('.slsDcustomUl').hide();
+      });
+      
+      $(document).click(function() {
+        $(".custom-options-selector").removeClass('active');
+      });
+      
+      $('.custom-options-selector li').on('click', function() {
+        const variantTitle = $(this).html();
+        const variantValue = $(this).data('value');
+       	$('.option-selector-trigger').html(variantTitle);
+        $('.custom-options-selector').removeClass('active');
+        $('#ProductSelect-product-template-custom').val(variantValue).change();
+      });
+      
+      $('#ProductSelect-product-template-custom').on('change', function() {
+        const self = this;
+        var colorArray = [
+          { class: "flavor-yellow-bg", value: '40619338793148' },
+          { class: "flavor-green-bg", value: '40619338825916' },
+          { class: "flavor-purple-bg", value: '40619338858684' },
+          { class: "flavor-blue-bg", value: '40619338891452' },
+          { class: "flavor-red-bg", value: '40619338924220' }
+        ];
+        const selected = colorArray.find(function(v) {
+          return v.value === self.value;
+        });
+        
+        colorArray.forEach(function(v) {
+          document.documentElement.classList.remove('flavor-yellow-bg');
+          document.documentElement.classList.remove(v.class);
+        });
+        
+        document.documentElement.classList.add(selected.class);
+      });
+      
+      $('#AddToCart').on('click', function(e) {
+        e.preventDefault();
+        $('.errors').remove();
+        var $addToCartBtn = $(this),
+          $addToCartForm = $(this).closest('form'),
+          $addToCartText = $(this).find('span');
+        if ($addToCartForm.length) {
+          $addToCartBtn
+            .prop('disabled', true)
+            .addClass('btn--ajax-disabled');
+          $.ajax({
+            url: '/cart/add.js',
+            dataType: 'json',
+            type: 'post',
+            data: $addToCartForm.serialize(),
+            success: function() {
+              $addToCartBtn.prop('disabled', false);
+              $addToCartBtn.removeClass('btn--ajax-disabled');
+              document.location.href = '/cart/checkout';
+            },
+            error: function(XMLHttpRequest) {
+              var data = eval('(' + XMLHttpRequest.responseText + ')');
+              var response = data.description;
+              var status = XMLHttpRequest.status;
+              $addToCartBtn.removeClass('btn--ajax-disabled');
+              if (status === 422) {
+                $addToCartText.text(theme.strings.soldOut);
+              } else {
+                $addToCartBtn.prop('disabled', false);
+                $addToCartText.text($addToCartBtn.data('add-to-cart'));
+              }
+              $addToCartBtn.after('<p class="errors">' + response + '</p>');
+            }
+          });
+        }
+      });
+    </script>
+      <style>
+        #header-mobile{position:fixed;left: 0;top:0;margin: 0;
+          padding: var(--s-3) var(--s-5);
+        }
+        @media(max-width: 900px){
+          #header-mobile{
+            padding: var(--s-2) var(--s-2) var(--s-6);
+            align-items: center;
+          }
+          #header{
+            align-items: center;
+            margin: 0;
+          }
+        }
+      </style>
+      <script>
+      	$(window).scroll(function(){
+          if ($(window).scrollTop() >= 300) {
+              $('#header-mobile').show();
+          }
+          else {
+              $('#header-mobile').hide();
+          }
+      });
+      </script>
+  {% endif %}
+        {{ 'theme.js' | asset_url | script_tag }}
+      
+      <style>
+       .custom-options-selector{
+          top: 100px;
+        }
+        .main-content{
+        	padding-left: 0px;
+          overflow: visible;
+        }
+      </style>
+      
+	</body>
+
+</html>
