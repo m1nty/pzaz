@@ -400,7 +400,7 @@
             {% endif %}
 
   <div class="product-single__description rte">
-    {{ product.description | split: '<!-- break -->' | last }}
+    {{ product.description  }}
   </div>
           
             <div class="product-single__cart-submit-wrapper{% if section.settings.enable_payment_button %} product-single__shopify-payment-btn{% endif %}{% if section.settings.add_to_cart_width == 'full_width' %} product-form--full{% endif %}">
